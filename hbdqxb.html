@@ -1,0 +1,357 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday qxb</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    
+    :root {
+      --primary: #ff66b2;
+      --secondary: #ff8fab;
+      --dark: #ff477e;
+      --light: #ffc2d1;
+      --text: #fff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .page {
+      position: absolute;
+      width: 90%;
+      max-width: 600px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.5s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .page.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      z-index: 10;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 50px;
+      background-color: var(--dark);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary);
+      transform: rotate(45deg);
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary);
+      border-radius: 50%;
+    }
+    
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: rotate(45deg) translateY(0);
+      }
+      50% {
+        transform: rotate(45deg) translateY(-20px);
+      }
+    }
+    
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 60px;
+      border-radius: 50%;
+      animation: balloon-float 8s ease-in-out infinite;
+      opacity: 0.7;
+    }
+    
+    @keyframes balloon-float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-60px) rotate(5deg);
+      }
+    }
+    
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      animation: bubble-float 6s ease-in-out infinite;
+    }
+    
+    @keyframes bubble-float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.8);
+        opacity: 0;
+      }
+    }
+    
+    .photo-frame {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      border: 5px solid white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .cake {
+      font-size: 3rem;
+      margin: 20px 0;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+    
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2 {
+        font-size: 1.4rem;
+      }
+      
+      p {
+        font-size: 1rem;
+      }
+      
+      .page {
+        width: 95%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container">
+    <!-- Floating elements -->
+    <div class="heart" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 80%; top: 30%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 30%; top: 70%; animation-delay: 2s;"></div>
+    
+    <div class="balloon" style="left: 15%; top: 80%; background-color: #ff9ff3; animation-delay: 0.5s;"></div>
+    <div class="balloon" style="left: 85%; top: 60%; background-color: #feca57; animation-delay: 1.5s;"></div>
+    <div class="balloon" style="left: 70%; top: 20%; background-color: #1dd1a1; animation-delay: 2.5s;"></div>
+    
+    <!-- Pages -->
+    <div class="page active" id="page1">
+      <div class="cake">🎂</div>
+      <h1>Happy Birthday lizy</h1>
+      <p>Klik tombol untuk buka pesan</p>
+      <button onclick="nextPage(2)">Klik</button>
+    </div>
+    
+    <div class="page" id="page2">
+      <div class="photo-frame">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2d729f10-f119-4aa3-aa35-35c30b5fefa4.png" alt="Birthday celebration with balloons and cake">
+      </div>
+      <h2>Selamat Ulang Tahun!</h2>
+      <p>Moga panjang umur, sehat selalu,<br>dan moga asma lu bisa sembuh</p>
+      <button onclick="nextPage(3)">Klik</button>
+    </div>
+    
+    <div class="page" id="page3">
+      <h2>Izin yapping</h2>
+      <p style="margin-bottom: 20px;">
+        heran gua kenapa gua dulu sok asik bet maksa chat² tan,<br>
+        karang pun gua buat ginian rasanya sama aja kek sok asik🙏🏻.<br><br>
+        tapi tq yah berkat lu pikiran gua jadi agak dewasa njir pas lu bilang:<br><br>
+        <i>
+          bisa udah ga?, alay tau ga ngepost" di tiktok buat apa? lu uda gede tp otaknya g nalar, sengaja bgt kayaknya, di baikin minta jantung, gue bisa aja laporin lu ya, dikira gue bodoh? gue minta hapus semua tentang gue, gausa kayak anak kecil
+        </i>
+        <br><br>
+        pas habis lu kirim itu gua langsung merenung liat kelakuan gua maksa chat² tan nyulik² gak jelas ya gitulah, sorry lah kalo dulu ganggu bet
+      </p>
+      <div class="btn-group">
+        <button onclick="nextPage(4)">Pesan Lanjutan</button>
+        <button onclick="nextPage(1)">Kembali ke Awal</button>
+      </div>
+    </div>
+    
+    <div class="page" id="page4">
+      <h2>Klarifikasi</h2>
+      <p>
+        gua buat giniaan gak buat lu luluh atau apalah, ya ini modal ai
+        si sebenarnya jadi buat nya gak susah² amat,<br>
+        gua cuma mw bilang HBD, sama minta maaf kelakuan gua dulu.<br><br>
+        ya sory lah kalo gua nongol lagi di kehidupan lu.
+        Jangan di laporin sumpah takut gua, gua dulu juga kepikiran seminggu
+        semenjak lu kirim pesan tadi, takut ada polisi nyamper gua🙏🏻🙏🏻
+      </p>
+      <button onclick="nextPage(1)">Kembali ke Awal</button>
+    </div>
+  </div>
+
+  <script>
+    // Create floating bubbles
+    function createBubbles() {
+      const container = document.getElementById('container');
+      for (let i = 0; i < 15; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        
+        const size = Math.random() * 30 + 10;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.bottom = `-${size}px`;
+        bubble.style.animationDuration = `${Math.random() * 4 + 4}s`;
+        bubble.style.animationDelay = `${Math.random() * 3}s`;
+        
+        container.appendChild(bubble);
+      }
+    }
+    
+    // Page navigation
+    function nextPage(pageNum) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      document.getElementById(`page${pageNum}`).classList.add('active');
+      
+      // Add animation effects when switching pages
+      if (pageNum === 1) {
+        createBubbles();
+      }
+    }
+    
+    // Initialize
+    window.onload = function() {
+      createBubbles();
+      
+      // Add click effect for more interactivity
+      document.addEventListener('click', function() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = `${Math.random() * 80 + 10}%`;
+        heart.style.top = `${Math.random() * 80 + 10}%`;
+        heart.style.animationDelay = `${Math.random() * 2}s`;
+        
+        document.getElementById('container').appendChild(heart);
+        
+        // Remove heart after animation completes
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      });
+    };
+  </script>
+</body>
+</html>
